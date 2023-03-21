@@ -1,22 +1,11 @@
 import { createApp } from "vue";
+import router from "./router.js";
 import App from "./App.vue";
+import store from "./store.js";
 
-// Router imports
-// import Vue from "vue";
-// import VueRouter from "vue-router";
+const app = createApp(App);
 
-createApp(App).mount("#app");
+app.use(router);
+app.use(store);
 
-// const app = createApp(App);
-
-// const router = createRouter({
-//     history: createWebHistory(),
-//     routes: [
-//         {path: '/teams', component: Teamslist, props: true},
-//         {path: '/users', component: UsersList, props: true}
-//     ]
-// });
-
-// app.use(router);
-
-// app.mount('#app');
+app.mount("#app");
