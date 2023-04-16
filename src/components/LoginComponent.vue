@@ -21,8 +21,8 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-    const email = ref("");
-    const password = ref("");
+    const email = ref("hasan@email.com");
+    const password = ref("password");
 
     async function authenticate() {
       if (

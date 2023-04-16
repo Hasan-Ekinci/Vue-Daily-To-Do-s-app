@@ -7,7 +7,7 @@ const store = createStore({
       counter: 0,
       userId: null,
       token: null,
-      loggedIn: false
+      loggedIn: false,
     };
   },
   mutations: {
@@ -20,13 +20,15 @@ const store = createStore({
     setUser(state, payload) {
       state.userId = payload.userId;
       state.token = payload.token;
-      state.loggedIn = true
+      state.loggedIn = true;
     },
+    logout(state) {
+      state.userId = null;
+      state.token = null;
+      state.loggedIn = false;
+    }
   },
   actions: {
-    increment(context) {
-      context.commit("increment");
-    },
     async login(context, payload) {
       await axios
         .post("http://127.0.0.1:8000/api/login", payload)
@@ -34,7 +36,7 @@ const store = createStore({
           context.commit("setUser", response.data);
         })
         .catch((error) => {
-          const newError = new Error(error.message || 'api error');
+          const newError = new Error(error.message || "api error");
           throw newError;
         });
     },
@@ -51,7 +53,7 @@ const store = createStore({
     },
     loggedIn(state) {
       return state.loggedIn;
-    }
+    },
   },
 });
 

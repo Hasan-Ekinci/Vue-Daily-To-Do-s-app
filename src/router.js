@@ -17,7 +17,6 @@ const router = createRouter({
 });
 
 router.beforeEach(function(to, _, next) {
-    console.log(!store.getters.loggedIn);
     if (to.meta.requiresAuth && !store.getters.loggedIn) {
         next('/login');
     } else if (!to.meta.requiresAuth && store.getters.loggedIn) {
