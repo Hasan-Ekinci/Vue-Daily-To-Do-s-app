@@ -7,7 +7,7 @@ const store = createStore({
       counter: 0,
       userId: null,
       token: null,
-      // tokenExpiration: null,
+      loggedIn: false
     };
   },
   mutations: {
@@ -20,6 +20,7 @@ const store = createStore({
     setUser(state, payload) {
       state.userId = payload.userId;
       state.token = payload.token;
+      state.loggedIn = true
     },
   },
   actions: {
@@ -42,8 +43,14 @@ const store = createStore({
     counter(state) {
       return state.counter;
     },
+    userId(state) {
+      return state.userId;
+    },
     token(state) {
       return state.token;
+    },
+    loggedIn(state) {
+      return state.loggedIn;
     }
   },
 });

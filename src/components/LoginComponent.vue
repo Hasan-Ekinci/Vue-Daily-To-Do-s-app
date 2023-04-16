@@ -12,6 +12,7 @@
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -35,7 +36,10 @@ export default {
           email: email.value,
           password: password.value,
         });
-        router.push({ path: "/" });
+        const loggedIn = computed(() => store.state.loggedIn);
+        if (loggedIn.value === true) {
+          router.push({ path: "/" });
+        }
       }
     }
 
