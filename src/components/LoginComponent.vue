@@ -11,14 +11,19 @@
 
 <script>
 import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   name: "LoginComponent",
   setup() {
+    const store = useStore();
+    const router = useRouter();
+
     const email = ref("");
     const password = ref("");
 
-    function authenticate() {
+    async function authenticate() {
       if (
         email.value === "" ||
         !email.value.includes("@") ||
@@ -26,7 +31,11 @@ export default {
       ) {
         // error
       } else {
-        // start authenticating
+        await store.dispatch("login", {
+          email: email.value,
+          password: password.value,
+        });
+        router.push({ path: "/" });
       }
     }
 
