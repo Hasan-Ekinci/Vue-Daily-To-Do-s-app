@@ -1,4 +1,6 @@
 <template>
+
+  <!-- TO DO: maak navigation bar conditional, alleen voor ingelogde pagina's -->
   <NavigationBar />
   <router-view />
 </template>
@@ -14,4 +16,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+* {
+  padding: 0;
+  margin: 0
+}
+</style>
