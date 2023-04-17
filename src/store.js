@@ -4,9 +4,12 @@ import axios from "axios";
 const store = createStore({
   state() {
     return {
-      userId: null,
+      // userId: null,
+      // token: null,
+      // loggedIn: false,
+      userId: 1,
       token: null,
-      loggedIn: false,
+      loggedIn: true,
     };
   },
   mutations: {

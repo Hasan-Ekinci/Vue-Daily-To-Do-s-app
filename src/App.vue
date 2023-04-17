@@ -31,4 +31,22 @@ export default {
   padding: 0;
   margin: 0;
 }
+
+:root {
+  --white: #FFFDF7;
+  --gray: #EFECE6;
+  --black: #252422;
+  --green: #99A810;
+  --red: #eb5e28;
+  --blue: #3394C1;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--white);
+  font-family: Verdana, sans-serif;
+}
 </style>

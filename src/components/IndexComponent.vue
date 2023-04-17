@@ -1,25 +1,35 @@
 <template>
-  <h1>Taken</h1>
+  <BaseComponent>
+    <h1 class="pageHeader">Alle Taken</h1>
 
-  <ul>
-    <li v-for="task in tasks" :key="task.id">
-      <h2>{{ task.title }}</h2>
-      <p>{{ task.description }}</p>
-    </li>
-  </ul>
+    <div>
+      <TaskComponent
+        v-for="task in tasks.tasks"
+        :key="task.id"
+        :task="task"
+        :border-colors="true"
+      />
+    </div>
+  </BaseComponent>
 </template>
 
 <script>
 import { computed, reactive } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
+import TaskComponent from "./subcomponents/TaskComponent.vue";
 
 export default {
   name: "IndexComponent",
+  components: {
+    TaskComponent,
+  },
   setup() {
     const store = useStore();
 
-    const tasks = reactive({});
+    const tasks = reactive({
+      tasks: {},
+    });
     const token = computed(() => store.getters.token);
     const userId = computed(() => store.getters.userId);
 
@@ -30,7 +40,7 @@ export default {
         },
       })
       .then((response) => {
-        tasks.value = response.data;
+        tasks.tasks = response.data;
       });
 
     return {
