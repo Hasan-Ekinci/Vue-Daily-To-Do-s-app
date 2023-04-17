@@ -22,6 +22,15 @@ export default {
     text-align: center;
 }
 
+.bg--light-green{
+    background-color: var(--light-green);
+}
+
+.bg--orange{
+    background-color: var(--orange
+    );
+}
+
 .border {
   border: 0.2rem solid var(--black);
   border-radius: 0.8rem;
