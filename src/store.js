@@ -7,6 +7,8 @@ const store = createStore({
       // userId: null,
       // token: null,
       // loggedIn: false,
+      tasks: null,
+
       userId: 1,
       token: null,
       loggedIn: true,
@@ -22,6 +24,10 @@ const store = createStore({
       state.userId = null;
       state.token = null;
       state.loggedIn = false;
+      state.tasks = null;
+    },
+    setTasks(state, payload) {
+      state.tasks = payload;
     },
   },
   actions: {
@@ -35,6 +41,20 @@ const store = createStore({
           throw new Error(error.message || "API error");
         });
     },
+    async getAllTasks({ state, commit }) {
+      await axios
+        .get("http://127.0.0.1:8000/api/tasks/" + state.userId, {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        })
+        .then((response) => {
+          commit("setTasks", response.data);
+        })
+        .catch((error) => {
+          throw new Error(error.message || "Retrieving tasks failed")
+        });
+    },
   },
   getters: {
     userId(state) {
@@ -45,6 +65,9 @@ const store = createStore({
     },
     loggedIn(state) {
       return state.loggedIn;
+    },
+    tasks(state) {
+      return state.tasks;
     },
   },
 });

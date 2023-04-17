@@ -2,7 +2,7 @@
   <BaseComponent>
     <h1 class="pageHeader">Alle Taken</h1>
 
-    <div>
+    <div v-if="tasks.tasks && tasks.tasks.length > 0">
       <TaskComponent
         v-for="task in tasks.tasks"
         :key="task.id"
@@ -10,13 +10,13 @@
         :border-colors="true"
       />
     </div>
+    <h2 v-else class="emptyScreenMessage">Geen taken gevonden</h2>
   </BaseComponent>
 </template>
 
 <script>
-import { computed, reactive } from "vue";
+import { computed, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
-import axios from "axios";
 import TaskComponent from "./subcomponents/TaskComponent.vue";
 
 export default {
@@ -30,18 +30,15 @@ export default {
     const tasks = reactive({
       tasks: {},
     });
-    const token = computed(() => store.getters.token);
-    const userId = computed(() => store.getters.userId);
 
-    axios
-      .get("http://127.0.0.1:8000/api/tasks/" + userId.value, {
-        headers: {
-          Authorization: `Bearer ${token.value}`,
-        },
-      })
-      .then((response) => {
-        tasks.tasks = response.data;
-      });
+    async function getAllTasks() {
+      await store.dispatch("getAllTasks");
+      tasks.tasks = computed(() => store.state.tasks);
+    }
+
+    onMounted(() => {
+      getAllTasks();
+    });
 
     return {
       tasks,
@@ -49,3 +46,11 @@ export default {
   },
 };
 </script>
+
+<style>
+.emptyScreenMessage {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 5rem;
+}
+</style>

@@ -30,7 +30,7 @@ export default {
         !email.value.includes("@") ||
         password.value === ""
       ) {
-        // error
+        // error, make something here
       } else {
         await store.dispatch("login", {
           email: email.value,
