@@ -18,13 +18,16 @@
         </Transition>
       </div>
 
-      <KeepAlive>
-        <CreateTaskComponent
-          class="mb-2"
-          v-if="showAddTask"
-          @close-add-task="showAddTask = !showAddTask"
-        />
-      </KeepAlive>
+      <Transition name="add-task-animation">
+        <KeepAlive>
+          <CreateTaskComponent
+            class="mb-2"
+            :key="0"
+            v-if="showAddTask"
+            @close-add-task="showAddTask = !showAddTask"
+          />
+        </KeepAlive>
+      </Transition>
     </div>
 
     <div v-if="tasks.tasks && tasks.tasks.length > 0">
@@ -102,7 +105,7 @@ export default {
 }
 
 .text-change-enter-active {
-  animation: slowlyAppear 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .text-change-leave-active {
@@ -114,12 +117,23 @@ export default {
   opacity: 0;
 }
 
+.add-task-animation-enter-active {
+  animation: slowlyAppear 0.4s ease;
+}
+
+.add-task-animation-leave-active {
+  animation: slowlyAppear 0.4s ease-in;
+  animation-direction: reverse;
+}
+
 @keyframes slowlyAppear {
   from {
     opacity: 0%;
+    transform: translateY(-50%);
   }
   to {
     opacity: 100%;
+    transform: translateY(0);
   }
 }
 </style>
