@@ -1,7 +1,10 @@
 <template>
   <div :class="['taskListWarpper border', borderColor]">
-    <h2 class="taskListTitle">{{ task.title }}</h2>
-    <p class="taskListDescription">{{ task.description }}</p>
+    <div class="p-05">
+      <h2 class="taskListTitle">{{ task.title }}</h2>
+      <p class="taskListDescription">{{ task.description }}</p>
+      <i>MAAK HIER: X van de X subtaken voltooid</i>
+    </div>
   </div>
 </template>
 
@@ -45,7 +48,6 @@ export default {
   width: 100%;
   background-color: var(--gray);
   margin-bottom: 1rem;
-  padding: 0.5rem;
   display: flex;
   gap: 2rem;
 }
@@ -54,7 +56,7 @@ export default {
   font-size: 2.5rem;
 }
 
-.taskListDescription{
+.taskListDescription {
   align-self: center;
   font-size: 1.8rem;
 }

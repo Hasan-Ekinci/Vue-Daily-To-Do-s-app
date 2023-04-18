@@ -12,23 +12,27 @@ export default {
 
 <style>
 .main {
-    width: 85%;
-    margin: 0 auto;
+  width: 85%;
+  margin: 0 auto;
+  cursor: default;
 }
 
 .pageHeader {
-    font-size: 4rem;
-    margin: 0 auto;
-    text-align: center;
+  font-size: 4rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.bg--light-green{
-    background-color: var(--light-green);
+.bg--gray {
+  background-color: var(--gray);
 }
 
-.bg--orange{
-    background-color: var(--orange
-    );
+.bg--light-green {
+  background-color: var(--light-green);
+}
+
+.bg--orange {
+  background-color: var(--orange);
 }
 
 .border {
@@ -37,7 +41,7 @@ export default {
 }
 
 .border--blue {
-    border-color: var(--blue);
+  border-color: var(--blue);
 }
 
 .border--green {
@@ -46,5 +50,27 @@ export default {
 
 .border--red {
   border-color: var(--red);
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.p-05 {
+  padding: 0.5rem;
+}
+
+.button:hover {
+  background-color: var(--gray);
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: var(--dark-gray);
+  color: white;
 }
 </style>

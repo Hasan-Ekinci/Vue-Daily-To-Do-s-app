@@ -2,16 +2,29 @@
   <BaseComponent>
     <h1 class="pageHeader">Alle Taken</h1>
 
-    <div class="addTaskSection">
-      <Transition name="text-change" mode="out-in">
-        <button
-          :class="['addTaskSectionButton border', showAddTaskText.colorClass]"
-          @click="showAddTask = !showAddTask"
-          :key="showAddTaskText.text"
-        >
-          {{ showAddTaskText.text }}
-        </button>
-      </Transition>
+    <div>
+      <div class="addTaskButtonSection">
+        <Transition name="text-change" mode="out-in">
+          <button
+            :class="[
+              'addTaskButtonSectionButton border button',
+              showAddTaskText.colorClass,
+            ]"
+            @click="showAddTask = !showAddTask"
+            :key="showAddTaskText.text"
+          >
+            {{ showAddTaskText.text }}
+          </button>
+        </Transition>
+      </div>
+
+      <KeepAlive>
+        <CreateTaskComponent
+          class="mb-2"
+          v-if="showAddTask"
+          @close-add-task="showAddTask = !showAddTask"
+        />
+      </KeepAlive>
     </div>
 
     <div v-if="tasks.tasks && tasks.tasks.length > 0">
@@ -29,12 +42,14 @@
 <script>
 import { computed, reactive, onMounted, ref } from "vue";
 import { useStore } from "vuex";
-import TaskComponent from "./subcomponents/TaskComponent.vue";
+import TaskComponent from "./indexSubComponents/TaskComponent.vue";
+import CreateTaskComponent from "./indexSubComponents/CreateTaskComponent.vue";
 
 export default {
   name: "IndexComponent",
   components: {
     TaskComponent,
+    CreateTaskComponent,
   },
   setup() {
     const store = useStore();
@@ -54,19 +69,15 @@ export default {
     const showAddTask = ref(false);
     const showAddTaskText = computed(() => {
       return {
-        text: !showAddTask.value ? "Voeg taken toe" : "Verberg",
+        text: !showAddTask.value ? "Voeg taak toe" : "Verberg",
         colorClass: showAddTask.value ? "bg--orange" : "bg--light-green",
       };
     });
-    // addTask() {
-
-    // }
 
     return {
       tasks,
       showAddTask,
       showAddTaskText,
-      // addTask,
     };
   },
 };
@@ -79,33 +90,23 @@ export default {
   margin-top: 5rem;
 }
 
-.addTaskSection {
+.addTaskButtonSection {
   display: flex;
   justify-content: end;
   margin: 2rem 0;
 }
 
-.addTaskSectionButton {
+.addTaskButtonSectionButton {
   font-size: 2rem;
   padding: 0.5rem;
 }
 
-.addTaskSectionButton:hover {
-  background-color: var(--gray);
-  cursor: pointer;
-}
-
-.addTaskSectionButton:active {
-  background-color: var(--green);
-  color: white;
-}
-
 .text-change-enter-active {
-  animation: slowlyAppear 0.3s ease;
+  animation: slowlyAppear 0.2s ease;
 }
 
 .text-change-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 
 .text-change-enter,

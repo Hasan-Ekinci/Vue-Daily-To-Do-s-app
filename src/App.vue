@@ -33,15 +33,16 @@ export default {
 }
 
 :root {
-  --white: #FFFDF7;
-  --gray: #EFECE6;
+  --white: #fffdf7;
+  --gray: #efece6;
+  --dark-gray: #91908d;
   --black: #252422;
-  --green: #99A810;
-  --light-green: #DDEE44;
-  --dark-green: #66700A;
+  --green: #99a810;
+  --light-green: #ddee44;
+  --dark-green: #66700a;
   --red: #eb5e28;
-  --orange: #EBAF2A;
-  --blue: #3394C1;
+  --orange: #ebaf2a;
+  --blue: #3394c1;
 }
 
 html {

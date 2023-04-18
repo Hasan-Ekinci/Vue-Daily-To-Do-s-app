@@ -52,7 +52,27 @@ const store = createStore({
           commit("setTasks", response.data);
         })
         .catch((error) => {
-          throw new Error(error.message || "Retrieving tasks failed")
+          throw new Error(error.message || "Retrieving tasks failed");
+        });
+    },
+    async addTask({ state, dispatch }, payload) {
+      const data = {
+        title: payload.title,
+        description: payload.description,
+        subTasks: payload.subTasks,
+        userId: state.userId,
+      };
+      await axios
+        .post("http://127.0.0.1:8000/api/add-task", data, {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        })
+        .then(() => {
+          dispatch("getAllTasks");
+        })
+        .catch((error) => {
+          throw new Error(error.message || "Adding task failed");
         });
     },
   },
