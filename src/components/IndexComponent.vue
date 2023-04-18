@@ -129,11 +129,13 @@ export default {
 @keyframes slowlyAppear {
   from {
     opacity: 0%;
-    transform: translateY(-50%);
+    transform: translateY(-100%);
+    margin-bottom: -30%;
   }
   to {
     opacity: 100%;
     transform: translateY(0);
+    margin-bottom: 2rem;
   }
 }
 </style>

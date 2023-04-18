@@ -4,14 +4,14 @@ import axios from "axios";
 const store = createStore({
   state() {
     return {
-      userId: null,
-      token: null,
-      loggedIn: false,
+      // userId: null,
+      // token: null,
+      // loggedIn: false,
       tasks: null,
 
-      // userId: 1,
-      // token: null,
-      // loggedIn: true,
+      userId: 1,
+      token: null,
+      loggedIn: true,
     };
   },
   mutations: {
