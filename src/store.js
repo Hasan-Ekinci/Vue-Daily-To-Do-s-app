@@ -4,14 +4,14 @@ import axios from "axios";
 const store = createStore({
   state() {
     return {
-      // userId: null,
-      // token: null,
-      // loggedIn: false,
+      userId: null,
+      token: null,
+      loggedIn: false,
       tasks: null,
 
-      userId: 1,
-      token: null,
-      loggedIn: true,
+      // userId: 1,
+      // token: null,
+      // loggedIn: true,
     };
   },
   mutations: {
@@ -21,6 +21,18 @@ const store = createStore({
       state.loggedIn = true;
     },
     logout(state) {
+      console.log('test');
+      axios.post(
+        "http://127.0.0.1:8000/api/logout",
+        {
+          userId: state.userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
       state.userId = null;
       state.token = null;
       state.loggedIn = false;
