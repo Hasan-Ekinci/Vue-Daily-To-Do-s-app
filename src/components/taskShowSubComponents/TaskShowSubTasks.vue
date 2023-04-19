@@ -1,5 +1,5 @@
 <template>
-  <div class="showSubTask border">
+  <div :class="['showSubTask border', subTask.done ? 'bg--light-green' : 'bg--gray']">
     <div v-if="!editField.title" class="showSubTaskTitleSection">
       <h1 class="showSubTaskTitle">{{ subTask.title }}</h1>
       <button @click="editField.title = !editField.title" class="button">
@@ -76,7 +76,6 @@ export default {
   padding: 0.5rem;
   display: flex;
   gap: 2rem;
-  background-color: var(--gray);
 }
 
 .showSubTaskTitleSection {

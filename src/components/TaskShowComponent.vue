@@ -15,8 +15,13 @@
         @close-edit="updateFields('title', $event)"
       />
 
+      <h2 class="taskStatus">
+        Status:
+        <i :style="'color:' + taskStatus.color">{{ taskStatus.text }}</i>
+      </h2>
+
       <div v-if="!editField.description">
-        <h2 class="taskShowDescription">{{ task.description }}</h2>
+        <h3 class="taskShowDescription">{{ task.description }}</h3>
         <button
           @click="editField.description = !editField.description"
           class="button"
@@ -33,13 +38,14 @@
         @close-edit="updateFields('description', $event)"
       />
 
-      <TaskShowActionButtons :task-id="task.id" />
+      <TaskShowActionButtons
+        v-if="showActionButtons"
+        :task="task"
+        @get-task="getTask"
+      />
 
       <div v-for="subTask in task.subtasks" :key="subTask.id">
-        <TaskShowSubTasks
-        :sub-task="subTask"
-        @get-task="getTask"
-        />
+        <TaskShowSubTasks :sub-task="subTask" @get-task="getTask" />
       </div>
     </div>
     <h2 v-else>Geen taak gevonden</h2>
@@ -47,7 +53,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -69,8 +75,15 @@ export default {
 
     const task = ref();
 
+    const showActionButtons = ref(true);
+
     async function getTask() {
       task.value = await store.dispatch("getTask", taskId);
+
+      showActionButtons.value = false;
+      nextTick(() => {
+        showActionButtons.value = true;
+      });
     }
 
     onMounted(() => {
@@ -89,11 +102,31 @@ export default {
       }
     }
 
+    const taskStatus = computed(() => {
+      if (task.value.done) {
+        return {
+          text: "Afgerond",
+          color: "var(--green)",
+        };
+      } else if (task.value.archived) {
+        return {
+          text: "Gearchiveerd",
+          color: "var(--red)",
+        };
+      }
+      return {
+        text: "Actief",
+        color: "var(--blue)",
+      };
+    });
+
     return {
       task,
+      showActionButtons,
       editField,
       updateFields,
-      getTask
+      getTask,
+      taskStatus,
     };
   },
 };
@@ -106,6 +139,11 @@ export default {
 .taskShowTitle {
   font-size: 3rem;
   margin-bottom: 0.5rem;
+}
+
+.taskStatus {
+  margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
 .taskShowDescription {
