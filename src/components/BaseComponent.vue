@@ -39,6 +39,10 @@ export default {
   background-color: var(--red);
 }
 
+.bg--blue {
+  background-color: var(--blue);
+}
+
 .border {
   border: 0.2rem solid var(--black);
   border-radius: 0.8rem;

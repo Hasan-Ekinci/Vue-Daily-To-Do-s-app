@@ -1,18 +1,25 @@
 <template>
   <div class="actionButtonsSection">
     <!-- ALLE SUBTAKEN OOK OP DONE  -->
-    <button class="button" @click="doAction('done', !task.done)">
-      {{ buttonText.done }}
+    <button
+      class="button actionShowButton"
+      :style="'background-color:' + buttonText.done.color"
+      @click="doAction('done', !task.done)"
+    >
+      {{ buttonText.done.text }}
     </button>
 
     <button
       v-if="!task.done"
-      class="button"
+      class="button actionShowButton"
+      :style="'background-color:' + buttonText.archived.color"
       @click="doAction('archive', !task.archived)"
     >
-      {{ buttonText.archived }}
+      {{ buttonText.archived.text }}
     </button>
-    <button class="button bg--red" @click="doAction('delete')">Verwijderen</button>
+    <button class="button bg--red actionShowButton" @click="doAction('delete')">
+      Verwijderen
+    </button>
   </div>
 </template>
 
@@ -48,14 +55,20 @@ export default {
         alert("Action failed");
       }
 
-      if (action === 'delete') {
+      if (action === "delete") {
         router.push({ path: "/" });
       }
     }
 
     const buttonText = ref({
-      done: props.task.done ? "Toch niet klaar" : "Afronden",
-      archived: props.task.archived ? "Uit archief halen" : "Archiveren",
+      done: {
+        text: props.task.done ? "Toch niet klaar" : "Afronden",
+        color: props.task.done ? "var(--gray)" : "var(--light-green)",
+      },
+      archived: {
+        text: props.task.archived ? "Uit archief halen" : "Archiveren",
+        color: props.task.archived ? "var(--blue)" : "var(--gray)",
+      },
     });
 
     return {
@@ -68,6 +81,14 @@ export default {
 
 <style>
 .actionButtonsSection {
-  margin: 4rem 0;
+  margin: 4rem 0 8rem;
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+}
+
+.actionShowButton {
+  font-size: 2.5rem;
+  border-radius: 0.5rem;
 }
 </style>
