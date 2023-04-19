@@ -73,4 +73,9 @@ export default {
   background-color: var(--dark-gray);
   color: white;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+}
 </style>

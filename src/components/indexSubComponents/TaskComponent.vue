@@ -1,11 +1,13 @@
 <template>
-  <div :class="['taskListWarpper border', borderColor]">
-    <div class="p-05">
-      <h2 class="taskListTitle">{{ task.title }}</h2>
-      <p class="taskListDescription">{{ task.description }}</p>
-      <i>MAAK HIER: X van de X subtaken voltooid</i>
+  <router-link :to="{ name: 'show', params: { id: task.id }}">
+    <div :class="['taskListWarpper border', borderColor]">
+      <div class="p-05">
+        <h2 class="taskListTitle">{{ task.title }}</h2>
+        <p class="taskListDescription">{{ task.description }}</p>
+        <i>MAAK HIER: X van de X subtaken voltooid</i>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>

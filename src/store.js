@@ -21,7 +21,6 @@ const store = createStore({
       state.loggedIn = true;
     },
     logout(state) {
-      console.log('test');
       axios.post(
         "http://127.0.0.1:8000/api/logout",
         {
@@ -86,6 +85,23 @@ const store = createStore({
         .catch((error) => {
           throw new Error(error.message || "Adding task failed");
         });
+    },
+    async getTask({ state }, taskId) {
+      let task = null
+      await axios
+      .get("http://127.0.0.1:8000/api/task/" + state.userId + "/" + taskId, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      })
+      .then((response) => {
+        task = response.data;
+      })
+      .catch((error) => {
+        throw new Error(error.message || "Retrieving task failed");
+      });
+
+      return task;
     },
   },
   getters: {
