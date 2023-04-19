@@ -1,9 +1,9 @@
 <template>
-  <div class="editFieldSection">
+  <div class="editFieldSection"
+  :style="'width:' + width + ';'">
     <input
       class="editFieldInput"
       :type="type"
-      :style="'width:' + width + ';'"
       v-model="editValue"
     />
 
@@ -60,7 +60,7 @@ export default {
       const success = await store.dispatch("saveEdit", {
         newValue: editValue.value,
         id: props.id,
-        isSubTask: props.isSubTask,
+        isSubtask: props.isSubTask,
         isTitle: props.isTitle,
       });
 
@@ -88,6 +88,7 @@ export default {
 .editFieldInput {
   margin-bottom: 2rem;
   padding: 0.5rem;
+  width: 100%;
 }
 
 .editFieldButtonSection {

@@ -36,7 +36,10 @@
       <TaskShowActionButtons :task-id="task.id" />
 
       <div v-for="subTask in task.subtasks" :key="subTask.id">
-        <TaskShowSubTasks :sub-task="subTask" />
+        <TaskShowSubTasks
+        :sub-task="subTask"
+        @get-task="getTask"
+        />
       </div>
     </div>
     <h2 v-else>Geen taak gevonden</h2>
@@ -90,6 +93,7 @@ export default {
       task,
       editField,
       updateFields,
+      getTask
     };
   },
 };
