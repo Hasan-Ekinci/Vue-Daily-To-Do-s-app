@@ -87,21 +87,38 @@ const store = createStore({
         });
     },
     async getTask({ state }, taskId) {
-      let task = null
+      let task = null;
       await axios
-      .get("http://127.0.0.1:8000/api/task/" + state.userId + "/" + taskId, {
-        headers: {
-          Authorization: `Bearer ${state.token}`,
-        },
-      })
-      .then((response) => {
-        task = response.data;
-      })
-      .catch((error) => {
-        throw new Error(error.message || "Retrieving task failed");
-      });
+        .get("http://127.0.0.1:8000/api/task/" + state.userId + "/" + taskId, {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        })
+        .then((response) => {
+          task = response.data;
+        })
+        .catch((error) => {
+          throw new Error(error.message || "Retrieving task failed");
+        });
 
       return task;
+    },
+    async saveEdit({ state }, payload) {
+      let success = null;
+      await axios
+        .post("http://127.0.0.1:8000/api/edit", payload, {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        })
+        .then(() => {
+          success = true;
+        })
+        .catch(() => {
+          success = false;
+        });
+
+      return success;
     },
   },
   getters: {

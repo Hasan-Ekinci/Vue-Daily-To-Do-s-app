@@ -64,14 +64,27 @@ export default {
   padding: 0.5rem;
 }
 
+.button {
+  padding: 0.5rem;
+}
+
 .button:hover {
   background-color: var(--gray);
   cursor: pointer;
+  color: black;
 }
 
 .button:active {
   background-color: var(--dark-gray);
   color: white;
+}
+
+.greenButton {
+  background-color: var(--light-green);
+}
+
+.redButton {
+  background-color: var(--red);
 }
 
 a {
