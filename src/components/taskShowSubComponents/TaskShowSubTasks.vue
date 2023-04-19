@@ -1,5 +1,10 @@
 <template>
-  <div :class="['showSubTask border', subTask.done ? 'bg--light-green' : 'bg--gray']">
+  <div
+    :class="[
+      'showSubTask border',
+      subTask.done || mainTaskDone ? 'bg--light-green' : 'bg--gray',
+    ]"
+  >
     <div v-if="!editField.title" class="showSubTaskTitleSection">
       <h1 class="showSubTaskTitle">{{ subTask.title }}</h1>
       <button @click="editField.title = !editField.title" class="button">
@@ -17,7 +22,10 @@
 
     <div v-if="!editField.description" class="showSubTaskDescriptionSection">
       <h2 class="showSubTaskDescription">{{ subTask.description }}</h2>
-      <button @click="editField.description = !editField.description" class="button">
+      <button
+        @click="editField.description = !editField.description"
+        class="button"
+      >
         Aanpassen
       </button>
     </div>
@@ -48,6 +56,10 @@ export default {
       type: Object,
       required: true,
     },
+    mainTaskDone: {
+      type: Boolean,
+      required: true,
+    },
   },
   setup(_, { emit }) {
     const editField = ref({
@@ -72,7 +84,7 @@ export default {
 
 <style>
 .showSubTask {
-  margin-top: 4rem;
+  margin-top: 1rem;
   padding: 0.5rem;
   display: flex;
   gap: 2rem;

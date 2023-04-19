@@ -45,7 +45,11 @@
       />
 
       <div v-for="subTask in task.subtasks" :key="subTask.id">
-        <TaskShowSubTasks :sub-task="subTask" @get-task="getTask" />
+        <TaskShowSubTasks
+          :sub-task="subTask"
+          :main-task-done="task.done"
+          @get-task="getTask"
+        />
       </div>
     </div>
     <h2 v-else>Geen taak gevonden</h2>

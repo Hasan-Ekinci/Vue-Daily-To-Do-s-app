@@ -35,6 +35,10 @@ export default {
   background-color: var(--orange);
 }
 
+.bg--red {
+  background-color: var(--red);
+}
+
 .border {
   border: 0.2rem solid var(--black);
   border-radius: 0.8rem;

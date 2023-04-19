@@ -12,13 +12,14 @@
     >
       {{ buttonText.archived }}
     </button>
-    <button class="button" @click="doAction('delete')">Verwijderen</button>
+    <button class="button bg--red" @click="doAction('delete')">Verwijderen</button>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   name: "TaskShowActionButtons",
@@ -31,6 +32,7 @@ export default {
   },
   setup(props, { emit }) {
     const store = useStore();
+    const router = useRouter();
 
     async function doAction(action, newValue = null) {
       const success = await store.dispatch("taskAction", {
@@ -44,6 +46,10 @@ export default {
         emit("getTask", true);
       } else {
         alert("Action failed");
+      }
+
+      if (action === 'delete') {
+        router.push({ path: "/" });
       }
     }
 
@@ -62,6 +68,6 @@ export default {
 
 <style>
 .actionButtonsSection {
-  margin-top: 4rem;
+  margin: 4rem 0;
 }
 </style>
