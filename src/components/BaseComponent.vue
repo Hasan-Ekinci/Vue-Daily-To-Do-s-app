@@ -72,6 +72,10 @@ export default {
   padding: 0.5rem;
 }
 
+.w-10p {
+  width: 10%;
+}
+
 .button {
   padding: 0.5rem;
 }

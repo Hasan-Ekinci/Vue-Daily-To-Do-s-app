@@ -35,21 +35,25 @@
       :id="subTask.id"
       :is-sub-task="true"
       :is-title="false"
-      width="70%"
+      width="50%"
       @close-edit="updateFields('description', $event)"
     />
+
+    <TaskShowSubTaskActionButtons :sub-task="subTask" @get-task="$emit('getTask')" />
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import EditFieldComponent from "./EditFieldComponent.vue";
+import TaskShowSubTaskActionButtons from "./TaskShowSubTaskActionButtons.vue";
 
 export default {
   name: "TaskShowSubTasks",
   emits: ["getTask"],
   components: {
     EditFieldComponent,
+    TaskShowSubTaskActionButtons,
   },
   props: {
     subTask: {
@@ -100,7 +104,7 @@ export default {
 
 .showSubTaskDescriptionSection {
   font-weight: normal;
-  width: 70%;
+  width: 50%;
   align-self: start;
 }
 
