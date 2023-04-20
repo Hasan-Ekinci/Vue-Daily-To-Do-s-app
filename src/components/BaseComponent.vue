@@ -13,7 +13,7 @@ export default {
 <style>
 .main {
   width: 85%;
-  margin: 0 auto;
+  margin: 10rem auto 0;
   cursor: default;
 }
 
@@ -98,5 +98,11 @@ export default {
 a {
   color: black;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 720px) {
+  .main {
+    margin: 0 auto;
+  }
 }
 </style>

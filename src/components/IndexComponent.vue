@@ -138,4 +138,10 @@ export default {
     margin-bottom: 2rem;
   }
 }
+
+@media only screen and (max-width: 720px) {
+  .addTaskButtonSection {
+    justify-content: center;
+  }
+}
 </style>

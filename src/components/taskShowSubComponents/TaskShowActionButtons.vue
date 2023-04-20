@@ -91,4 +91,17 @@ export default {
   font-size: 2.5rem;
   border-radius: 0.5rem;
 }
+
+@media only screen and (max-width: 720px) {
+  .actionButtonsSection {
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .actionShowButton {
+    width: 40%;
+    margin: 0 auto;
+  }
+}
 </style>
