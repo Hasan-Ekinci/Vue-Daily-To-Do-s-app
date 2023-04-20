@@ -96,6 +96,10 @@
             <p class="align-center nav-link-mobile">Afgerond</p>
           </router-link>
 
+          <button class="button redButton logoutButtonMobile" @click="logout">
+            Log Uit
+          </button>
+
           <button
             @click="toggleMobileMenu(false)"
             class="closeModalInside button"
@@ -335,6 +339,11 @@ export default {
     rgba(145, 144, 141, 1) 75%,
     rgba(73, 72, 70, 1) 100%
   );
+}
+
+.logoutButtonMobile{
+  grid-row: 17 / span 2;
+  font-size: 2rem;
 }
 
 .closeModalInside {
