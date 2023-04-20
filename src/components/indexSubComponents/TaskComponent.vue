@@ -4,7 +4,7 @@
       <div class="p-05">
         <h2 class="taskListTitle">{{ task.title }}</h2>
         <p class="taskListDescription">{{ task.description }}</p>
-        <i>MAAK HIER: X van de X subtaken voltooid</i>
+        <i v-if="task.subtasks_count > 0">{{ task.done_sub_tasks_count }} van de {{ task.subtasks_count }} subtaken voltooid</i>
       </div>
     </div>
   </router-link>

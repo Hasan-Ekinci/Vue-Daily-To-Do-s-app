@@ -4,8 +4,10 @@ import store from "./store";
 // import components globally for routes
 import LoginComponent from "./components/LoginComponent.vue";
 import IndexComponent from "./components/IndexComponent.vue";
-import TasksDoneComponent from "./components/TasksDoneComponent.vue";
 import TaskShowComponent from "./components/TaskShowComponent.vue";
+import TasksDoneComponent from "./components/TasksDoneComponent.vue";
+import TasksActiveComponent from "./components/TasksActiveComponent.vue";
+import TasksArchivedComponent from "./components/TasksArchivedComponent.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -29,8 +31,20 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
+      path: "/active",
+      component: TasksActiveComponent,
+      props: true,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/archived",
+      component: TasksArchivedComponent,
+      props: true,
+      meta: { requiresAuth: true },
+    },
+    {
       path: "/task/:id",
-      name: 'show',
+      name: "show",
       component: TaskShowComponent,
       props: true,
       meta: { requiresAuth: true },

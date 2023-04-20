@@ -52,13 +52,16 @@ const store = createStore({
           throw new Error(error.message || "API error");
         });
     },
-    async getAllTasks({ state, commit }) {
+    async getAllTasks({ state, commit }, type = "") {
       await axios
-        .get("http://127.0.0.1:8000/api/tasks/" + state.userId, {
-          headers: {
-            Authorization: `Bearer ${state.token}`,
-          },
-        })
+        .get(
+          "http://127.0.0.1:8000/api/tasks/" + state.userId + "/" + type,
+          {
+            headers: {
+              Authorization: `Bearer ${state.token}`,
+            },
+          }
+        )
         .then((response) => {
           commit("setTasks", response.data);
         })

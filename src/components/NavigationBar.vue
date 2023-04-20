@@ -9,15 +9,15 @@
         <p class="align-center nav-link">Alle taken</p>
       </router-link>
 
-      <router-link to="/" class="nav-link-wrapper">
+      <router-link to="/active" class="nav-link-wrapper">
         <p class="align-center nav-link">Actief</p>
       </router-link>
 
-      <router-link to="/" class="nav-link-wrapper">
+      <router-link to="/archived" class="nav-link-wrapper">
         <p class="align-center nav-link">Gearchiveerd</p>
       </router-link>
 
-      <router-link to="/" class="nav-link-wrapper">
+      <router-link to="/done" class="nav-link-wrapper">
         <p class="align-center nav-link">Afgerond</p>
       </router-link>
     </div>
@@ -73,7 +73,7 @@
           </router-link>
 
           <router-link
-            to="/"
+            to="/active"
             @click="toggleMobileMenu(false)"
             class="nav-link-wrapper-mobile"
           >
@@ -81,7 +81,7 @@
           </router-link>
 
           <router-link
-            to="/"
+            to="/archived"
             @click="toggleMobileMenu(false)"
             class="nav-link-wrapper-mobile"
           >
@@ -89,7 +89,7 @@
           </router-link>
 
           <router-link
-            to="/"
+            to="/done"
             @click="toggleMobileMenu(false)"
             class="nav-link-wrapper-mobile"
           >
