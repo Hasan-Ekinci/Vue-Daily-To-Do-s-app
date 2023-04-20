@@ -51,6 +51,10 @@
           @get-task="getTask"
         />
       </div>
+
+      <button @click="addSubtask()" class="button greenButton mt-2">
+        Subtaak toevoegen
+      </button>
     </div>
     <h2 v-else>Geen taak gevonden</h2>
   </BaseComponent>
@@ -124,6 +128,18 @@ export default {
       };
     });
 
+    async function addSubtask() {
+      const success = await store.dispatch("addSubtask", {
+        taskId: task.value.id,
+      });
+
+      if (success) {
+        getTask();
+      } else {
+        alert("Action failed");
+      }
+    }
+
     return {
       task,
       showActionButtons,
@@ -131,6 +147,7 @@ export default {
       updateFields,
       getTask,
       taskStatus,
+      addSubtask,
     };
   },
 };

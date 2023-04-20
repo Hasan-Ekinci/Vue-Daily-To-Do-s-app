@@ -137,6 +137,23 @@ const store = createStore({
 
       return success;
     },
+    async addSubtask({ state }, payload) {
+      let success = null;
+      await axios
+        .post("http://127.0.0.1:8000/api/addsubtask", payload, {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        })
+        .then(() => {
+          success = true;
+        })
+        .catch(() => {
+          success = false;
+        });
+
+      return success;
+    },
   },
   getters: {
     userId(state) {

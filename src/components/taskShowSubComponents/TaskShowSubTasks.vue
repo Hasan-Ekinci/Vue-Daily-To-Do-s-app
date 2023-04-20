@@ -39,7 +39,11 @@
       @close-edit="updateFields('description', $event)"
     />
 
-    <TaskShowSubTaskActionButtons :sub-task="subTask" @get-task="$emit('getTask')" />
+    <TaskShowSubTaskActionButtons
+      :sub-task="subTask"
+      :main-task-done="mainTaskDone"
+      @get-task="$emit('getTask')"
+    />
   </div>
 </template>
 

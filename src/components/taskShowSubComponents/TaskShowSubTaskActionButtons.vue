@@ -1,5 +1,5 @@
 <template>
-  <div class="subTaskActionButtonsSection">
+  <div v-if="!mainTaskDone" class="subTaskActionButtonsSection">
     <button
       v-if="showDoneButton"
       @click="doAction('done', !subTask.done)"
@@ -23,10 +23,14 @@ import { useStore } from "vuex";
 
 export default {
   name: "TaskShowSubtaskActionButtons",
-  emits: ['getTask'],
+  emits: ["getTask"],
   props: {
     subTask: {
       type: Object,
+      required: true,
+    },
+    mainTaskDone: {
+      type: Boolean,
       required: true,
     },
   },
