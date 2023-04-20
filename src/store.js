@@ -52,6 +52,16 @@ const store = createStore({
           throw new Error(error.message || "API error");
         });
     },
+    async register(context, payload) {
+      await axios
+        .post("http://127.0.0.1:8000/api/register", payload)
+        .then((response) => {
+          context.commit("setUser", response.data);
+        })
+        .catch((error) => {
+          throw new Error(error.message || "API error");
+        });
+    },
     async getAllTasks({ state, commit }, type = "") {
       await axios
         .get(

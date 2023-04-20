@@ -3,13 +3,35 @@
     <h1>Daily To Do's</h1>
 
     <form class="loginForm" @submit.prevent="authenticate">
-      <h2>Login</h2>
+      <h2 v-show="loginMode">Login</h2>
+      <h2 v-show="!loginMode">Registreren</h2>
+      <button
+        @click.prevent="loginMode = !loginMode"
+        class="changeLoginMode"
+        v-show="!loginMode"
+      >
+        of login
+      </button>
+      <button
+        @click.prevent="loginMode = !loginMode"
+        class="changeLoginMode"
+        v-show="loginMode"
+      >
+        of registreer
+      </button>
+
       <h3>Email</h3>
       <input type="email" v-model="email" />
       <h3>Wachtwoord</h3>
       <input type="password" v-model="password" />
+
       <br />
-      <button type="submit">Login</button>
+      <button v-show="loginMode" class="loginFormButton" type="submit">
+        Login
+      </button>
+      <button v-show="!loginMode" class="loginFormButton" type="submit">
+        Register
+      </button>
     </form>
   </div>
 </template>
@@ -29,6 +51,8 @@ export default {
     const email = ref("hasan@email.com");
     const password = ref("password");
 
+    const loginMode = ref(true);
+
     async function authenticate() {
       if (
         email.value === "" ||
@@ -36,8 +60,17 @@ export default {
         password.value === ""
       ) {
         // error, make something here
-      } else {
+      } else if (loginMode.value === true) {
         await store.dispatch("login", {
+          email: email.value,
+          password: password.value,
+        });
+        const loggedIn = computed(() => store.state.loggedIn);
+        if (loggedIn.value === true) {
+          router.push({ path: "/" });
+        }
+      } else {
+        await store.dispatch("register", {
           email: email.value,
           password: password.value,
         });
@@ -52,6 +85,7 @@ export default {
       email,
       password,
       authenticate,
+      loginMode,
     };
   },
 };
@@ -88,7 +122,6 @@ export default {
 
 .loginForm h2 {
   font-size: 3rem;
-  margin-bottom: 2rem;
 }
 
 .loginForm h3 {
@@ -103,20 +136,38 @@ export default {
   border-radius: 1rem;
 }
 
-.loginForm button {
+.loginFormButton {
   margin: 0 auto;
   display: block;
   background-color: var(--light-green);
   font-size: 2rem;
   padding: 1rem;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
-.loginForm button:hover {
+.loginFormButton:hover {
   background-color: var(--light-gray);
 }
 
-.loginForm button:active {
+.loginFormButton:active {
+  background-color: var(--dark-gray);
+  color: white;
+}
+
+.changeLoginMode {
+  margin: 1rem 0 2rem;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.changeLoginMode:hover {
+  background-color: var(--light-gray);
+}
+
+.changeLoginMode:active {
   background-color: var(--dark-gray);
   color: white;
 }
