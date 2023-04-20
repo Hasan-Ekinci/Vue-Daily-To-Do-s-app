@@ -5,19 +5,19 @@
     </div>
 
     <div class="naviagtion align-center">
-      <router-link to="/" class="nav-link-wrapper">
+      <router-link to="/" exact-active-class="exact-active" class="nav-link-wrapper">
         <p class="align-center nav-link">Alle taken</p>
       </router-link>
 
-      <router-link to="/active" class="nav-link-wrapper">
+      <router-link to="/active" exact-active-class="exact-active" class="nav-link-wrapper">
         <p class="align-center nav-link">Actief</p>
       </router-link>
 
-      <router-link to="/archived" class="nav-link-wrapper">
+      <router-link to="/archived" exact-active-class="exact-active" class="nav-link-wrapper">
         <p class="align-center nav-link">Gearchiveerd</p>
       </router-link>
 
-      <router-link to="/done" class="nav-link-wrapper">
+      <router-link to="/done" exact-active-class="exact-active" class="nav-link-wrapper">
         <p class="align-center nav-link">Afgerond</p>
       </router-link>
     </div>
@@ -65,7 +65,7 @@
           </div>
 
           <router-link
-            to="/"
+            to="/" exact-active-class="exact-active"
             @click="toggleMobileMenu(false)"
             class="nav-link-wrapper-mobile"
           >
@@ -73,7 +73,7 @@
           </router-link>
 
           <router-link
-            to="/active"
+            to="/active" exact-active-class="exact-active"
             @click="toggleMobileMenu(false)"
             class="nav-link-wrapper-mobile"
           >
@@ -81,7 +81,7 @@
           </router-link>
 
           <router-link
-            to="/archived"
+            to="/archived" exact-active-class="exact-active"
             @click="toggleMobileMenu(false)"
             class="nav-link-wrapper-mobile"
           >
@@ -89,7 +89,7 @@
           </router-link>
 
           <router-link
-            to="/done"
+            to="/done" exact-active-class="exact-active"
             @click="toggleMobileMenu(false)"
             class="nav-link-wrapper-mobile"
           >
@@ -133,7 +133,7 @@ export default {
       router.push({ path: "/login" });
     }
 
-    const showMobileMenu = ref(true);
+    const showMobileMenu = ref(false);
     function toggleMobileMenu(newValue) {
       showMobileMenu.value = newValue;
       console.log(showMobileMenu.value);
@@ -349,6 +349,11 @@ export default {
 .closeModalInside {
   grid-row: 19 / span 2;
   font-size: 2rem;
+}
+
+.exact-active {
+  text-decoration: underline;
+  color: white;
 }
 
 @media only screen and (max-width: 890px) {
